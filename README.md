@@ -13,4 +13,5 @@
  * Add to cart
  * Update cart
  * Clear Cart
+ * Remove item from cart
  * TBD
