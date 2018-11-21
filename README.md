@@ -14,4 +14,5 @@
  * Update cart
  * Clear Cart
  * Remove item from cart
+ * Order History
  * TBD
