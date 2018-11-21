@@ -110,7 +110,7 @@ public class Cart
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/test";
 			String user="root";
-			String pass="";
+			String pass="Rahul@123";
 			Connection con=DriverManager.getConnection(url,user,pass);
 			String sql="INSERT INTO `orders` (`ordid`, `userid`, `orddate`, `totamt`, `status`, `isbn`) VALUES (NULL, '"+userid+"', '"+now+"', '"+total+"', 'a', '2')";
 			Statement stmt=con.createStatement();
