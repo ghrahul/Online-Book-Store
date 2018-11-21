@@ -1,5 +1,5 @@
 #create database test;
-
+/*
 use test;
 create table users
 ( userid  varchar(10)  primary key,
@@ -9,3 +9,6 @@ create table users
    address varchar(100),
    phone   varchar(20)
 );
+*/
+use test;
+select * from users;
