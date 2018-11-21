@@ -57,22 +57,17 @@ Invalid Username try again
 		
   
 		
-  if (user.isLogged())
+  if (user.isLogged()){
 	  out.println("you are logged in");
+	  response.sendRedirect("home.jsp");
+  }
   else
   {
 	  out.println("<h1>Invalid login <a href=login.html>here</a> try again </h1>");
   }
 %>
 
-<%--
 
-<%
-  else
-     response.sendRedirect("home.jsp"); 
-%>
-
- --%>
 
 </center>
 </body>
