@@ -6,6 +6,8 @@ import obs.*;
 import javax.ejb.*;
 import javax.naming.*;
 import obs.order.*;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;  
 
 
 
@@ -95,26 +97,35 @@ public class Cart
    } // end of updateQty()
 
 
-  public String finalizeOrder(int userid) 
+  public boolean finalizeOrder(int userid,int total) 
   {
      
-   try
-   {
-      Context ctx = getInitialContext();  
-      // get access to bean
-
-      OrderHome home = (OrderHome)  ctx.lookup("obs.order");
-      Order order = home.create();
-
-      String id=  order.addOrder(userid,items);
-      return id;
-   }
-   catch(Exception ex)
-   {
-     System.out.println( ex.getMessage());
-     return null;
- 
-   }
+	  try {
+			Scanner sc=new Scanner(System.in);
+			
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/test";
+			String user="root";
+			String pass="";
+			Connection con=DriverManager.getConnection(url,user,pass);
+			String sql="INSERT INTO `orders` (`ordid`, `userid`, `orddate`, `totamt`, `status`, `isbn`) VALUES (NULL, '"+userid+"', '"+now+"', '"+total+"', 'a', '2')";
+			Statement stmt=con.createStatement();
+			stmt.executeUpdate(sql);
+			con.close();
+			System.out.println("Record inserted");
+			
+			return true;
+			
+		} catch(Exception ex)
+	   	{
+		     System.out.println( ex.getMessage());
+		     return false;
+		 
+		   }
 
   } // end of  finalizeOrder
 

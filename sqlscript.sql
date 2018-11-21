@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 07:24 PM
+-- Generation Time: Nov 21, 2018 at 10:27 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 --
 create database test;
 use test;
+
 CREATE TABLE `books` (
   `isbn` int(10) NOT NULL,
   `title` varchar(30) DEFAULT NULL,
@@ -43,10 +44,9 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`isbn`, `title`, `author`, `pub`, `cat`, `price`) VALUES
-(1, 'harry  potter', 'jk', 'dc', 'Oracl', 12),
-(1001, 'Prof. JSP', 'Wrox Team', 'Wrox', 'java', 500),
-(2045, 'VB.NET Black Book', 'Steven Holtzner', 'DreamTech', '.net', 450),
-(5007, 'Prof. ASP.NET', 'Wrox Team', 'Wrox', '.net', 675);
+(1, 'Java Programming', 'Manish Hurkat', 'NIIT', 'Java', 1000),
+(2, 'Introduction .Net Programming', 'Akhelesh Agarwal', 'NIIT', '.NET', 500),
+(3, 'Introduction to Oracle', 'Sumen Dey', 'NIIT', 'Oracl', 600);
 
 -- --------------------------------------------------------
 
@@ -70,17 +70,34 @@ CREATE TABLE `orderitem` (
 CREATE TABLE `orders` (
   `ordid` int(5) NOT NULL,
   `userid` int(5) DEFAULT NULL,
-  `orddate` date DEFAULT NULL,
+  `orddate` timestamp NULL DEFAULT NULL,
   `totamt` int(6) DEFAULT NULL,
-  `status` char(1) DEFAULT NULL
+  `status` char(1) DEFAULT NULL,
+  `isbn` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ordid`, `userid`, `orddate`, `totamt`, `status`) VALUES
-(0, 2, '2018-11-21', 500, 'A');
+INSERT INTO `orders` (`ordid`, `userid`, `orddate`, `totamt`, `status`, `isbn`) VALUES
+(1, 2, '2018-11-20 18:30:00', 500, 'A', 0),
+(2, 2, NULL, 500, 'a', 0),
+(3, 2, '2018-11-20 18:30:00', 600, 'a', 0),
+(4, 2, '2018-11-20 18:30:00', 500, 'a', 0),
+(5, 2, '2018-11-20 18:30:00', 500, 'a', 0),
+(6, 2, '2018-11-20 18:30:00', 500, 'a', 0),
+(7, 2, '2018-11-20 18:30:00', 500, 'a', 3),
+(8, 2, '2018-11-20 18:30:00', 500, 'a', 3),
+(9, 2, '2018-11-21 18:30:00', 400, 'a', 2),
+(10, 2, '2018-11-21 18:30:00', 400, 'a', 2),
+(11, 2, '2018-11-21 18:30:00', 450, 'a', 2),
+(12, 2, '2018-11-21 20:07:04', 12, 'a', 2),
+(13, 2, '2018-11-21 20:20:58', 450, 'a', 2),
+(14, 2, '2018-11-21 20:22:08', 450, 'a', 2),
+(15, 2, '2018-11-21 20:23:41', 450, 'a', 2),
+(16, 2, '2018-11-21 20:29:23', 675, 'a', 2),
+(17, 2, '2018-11-21 20:40:27', 450, 'a', 2);
 
 -- --------------------------------------------------------
 
@@ -134,6 +151,16 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`),
   ADD UNIQUE KEY `uname` (`uname`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `ordid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

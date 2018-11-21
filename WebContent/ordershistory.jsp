@@ -36,7 +36,7 @@ th {font:700 10pt verdana;background-color:green;color:white}
 
 <%
   String type = request.getParameter("type");
-  String  cmd = "select ordid, orddate, totamt,decode(status,'n','New','p','Processed','d','Dispatched','Completed') textstatus,status from orders where userid = " + user.getUserid();
+  String  cmd = "select ordid, orddate, userid,totamt,status,isbn from orders where userid = " + user.getUserid();
    
   if ( type != null)
   {
@@ -97,11 +97,3 @@ th {font:700 10pt verdana;background-color:green;color:white}
 
   
 </table>
-
-  
-
-
-
-
-
-  

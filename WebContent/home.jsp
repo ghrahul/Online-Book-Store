@@ -13,52 +13,7 @@ a {font:700 10pt verdana;color:darkgreen}
 </style>
 
 <%
-  String act = request.getParameter("act");
-
-  if ( act != null )
-  {
-   if( act.equals("Finalize Order"))
-   {
-     String orderid;
-    
-      orderid =  cart.finalizeOrder(2);
-      if ( orderid == null)
-      {
-         out.println("Sorry! Order Cannot be finalized.");
-         return;
-      }
-      else
-      {
-         out.println("Order Has Been Finalized. Order id : " + orderid );
-         out.println("<a href=home.jsp>Continue...</a>");
-         cart.clearAll();
-         return;
-      }
-
-       
-   }   
-
-   if ( act.equals("remove"))
-   {
-    cart.removeItem( request.getParameter("isbn"));
-   }
-   else 
-    if ( act.equals("Update Cart"))
-    {
   
-      String isbn[] = (String []) request.getParameterValues("isbn");
-      String qty[] = (String []) request.getParameterValues("qty");
-
-      for (int i = 0 ;i < isbn.length ;i ++)
-         cart.updateQty(isbn[i], Integer.parseInt( qty[i]));
-
-    }
-    else
-     if ( act.equals("Clear Cart"))
-          cart.clearAll();
-   } // end of outer if
- 
-
 %>
 
 
@@ -117,6 +72,55 @@ Welcome <b><jsp:getProperty name="user" property="uname"/> </b>
 
 <%
  }
+ String act = request.getParameter("act");
+	
+ if ( act != null )
+ {
+  if( act.equals("Finalize Order"))
+  {
+    boolean orderid;
+    String isb[] = (String []) request.getParameterValues("isbn");
+   	
+     orderid =  cart.finalizeOrder(user.getUserid(),total );
+     if ( orderid == false)
+     {
+    	 //out.println(item.getIsbn());
+   	  out.println("Sorry! Order Cannot be finalized.");
+        return;
+     }
+     else
+     {
+        out.println("Order Has Been Finalized. Order id : " + orderid );
+        //out.println(isb);
+        out.println("<a href=home.jsp>Continue...</a>");
+        cart.clearAll();
+        return;
+     }
+
+      
+  }   
+
+  if ( act.equals("remove"))
+  {
+   cart.removeItem( request.getParameter("isbn"));
+  }
+  else 
+   if ( act.equals("Update Cart"))
+   {
+ 
+     String isbn[] = (String []) request.getParameterValues("isbn");
+     String qty[] = (String []) request.getParameterValues("qty");
+
+     for (int i = 0 ;i < isbn.length ;i ++)
+        cart.updateQty(isbn[i], Integer.parseInt( qty[i]));
+
+   }
+   else
+    if ( act.equals("Clear Cart"))
+         cart.clearAll();
+  } // end of outer if
+
+
 %>
 <tr>
 <td colspan=5 style="text-align:center;font:700 12pt verdana;color:navy">
