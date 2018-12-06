@@ -8,6 +8,7 @@
  * Login
  * Registration
  * Logout
+ * Update Profile
  * Browse Books
  * Query Books
  * Add to cart
@@ -15,4 +16,7 @@
  * Clear Cart
  * Remove item from cart
  * Order History
- * TBD
+ * Admin panel
+ * Report Generation
+ 
+ 
